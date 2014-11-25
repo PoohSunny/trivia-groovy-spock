@@ -1,0 +1,6 @@
+trivia-groovy-spock.iml
+trivia-groovy-spock.ipr
+trivia-groovy-spock.iws
+.gradle
+out
+build
