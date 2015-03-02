@@ -39,8 +39,8 @@ public class Game {
 	    purses[howManyPlayers()] = 0
 	    inPenaltyBox[howManyPlayers()] = false
 	    
-	    println playerName + " was added"
-	    println "They are player number " + players.size()
+	    printMessage playerName + " was added"
+	    printMessage "They are player number " + players.size()
 		return true
 	}
 	
@@ -48,23 +48,27 @@ public class Game {
 		return players.size()
 	}
 
+  void printMessage(Object arg) {
+    println arg
+  }
+
 	public void roll(int roll) {
-		println players.get(currentPlayer) + " is the current player"
-		println "They have rolled a " + roll
+		printMessage players.get(currentPlayer) + " is the current player"
+		printMessage "They have rolled a " + roll
 		
 		if (inPenaltyBox[currentPlayer]) {
 			if (roll % 2 != 0) {
 				isGettingOutOfPenaltyBox = true
 				
-				println players.get(currentPlayer) + " is getting out of the penalty box"
+				printMessage players.get(currentPlayer) + " is getting out of the penalty box"
 				places[currentPlayer] = places[currentPlayer] + roll
 				if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
 				
-    			println "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
-				println "The category is " + currentCategory()
+    			printMessage "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
+				printMessage "The category is " + currentCategory()
 				askQuestion()
 			} else {
-				println players.get(currentPlayer) + " is not getting out of the penalty box"
+				printMessage players.get(currentPlayer) + " is not getting out of the penalty box"
 				isGettingOutOfPenaltyBox = false
 				}
 			
@@ -73,8 +77,8 @@ public class Game {
 			places[currentPlayer] = places[currentPlayer] + roll
 			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
 			
-			println "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
-			println "The category is " + currentCategory()
+			printMessage "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
+			printMessage "The category is " + currentCategory()
 			askQuestion()
 		}
 		
@@ -82,13 +86,13 @@ public class Game {
 
 	private void askQuestion() {
 		if (currentCategory() == "Pop")
-			println popQuestions.removeFirst()
+			printMessage popQuestions.removeFirst()
 		if (currentCategory() == "Science")
-			println scienceQuestions.removeFirst()
+			printMessage scienceQuestions.removeFirst()
 		if (currentCategory() == "Sports")
-			println sportsQuestions.removeFirst()
+			printMessage sportsQuestions.removeFirst()
 		if (currentCategory() == "Rock")
-			println rockQuestions.removeFirst()		
+			printMessage rockQuestions.removeFirst()
 	}
 	
 	
@@ -108,9 +112,9 @@ public class Game {
 	public boolean wasCorrectlyAnswered() {
 		if (inPenaltyBox[currentPlayer]){
 			if (isGettingOutOfPenaltyBox) {
-				println "Answer was correct!!!!"
+				printMessage "Answer was correct!!!!"
 				purses[currentPlayer]++
-    			println "${players.get(currentPlayer)} now has ${purses[currentPlayer]} Gold Coins."
+    			printMessage "${players.get(currentPlayer)} now has ${purses[currentPlayer]} Gold Coins."
 				
 				boolean winner = didPlayerWin()
 				currentPlayer++
@@ -127,9 +131,9 @@ public class Game {
 			
 		} else {
 		
-			println "Answer was corrent!!!!"
+			printMessage "Answer was corrent!!!!"
 			purses[currentPlayer]++
-			println "${players.get(currentPlayer)} now has ${purses[currentPlayer]} Gold Coins."
+			printMessage "${players.get(currentPlayer)} now has ${purses[currentPlayer]} Gold Coins."
 			
 			boolean winner = didPlayerWin()
 			currentPlayer++
@@ -140,8 +144,8 @@ public class Game {
 	}
 	
 	public boolean wrongAnswer(){
-		println "Question was incorrectly answered"
-		println players.get(currentPlayer)+ " was sent to the penalty box"
+		printMessage "Question was incorrectly answered"
+		printMessage players.get(currentPlayer)+ " was sent to the penalty box"
 		inPenaltyBox[currentPlayer] = true
 		
 		currentPlayer++
