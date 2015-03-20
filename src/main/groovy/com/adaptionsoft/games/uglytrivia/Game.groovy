@@ -113,13 +113,11 @@ public class Game {
         println "${players.get(currentPlayer)} now has ${purses[currentPlayer]} Gold Coins."
 
         boolean winner = didPlayerWin()
-        currentPlayer++
-        if (currentPlayer == players.size()) currentPlayer = 0
+        changePlayer()
 
         return winner
       } else {
-        currentPlayer++
-        if (currentPlayer == players.size()) currentPlayer = 0
+        changePlayer()
         return true
       }
 
@@ -132,8 +130,7 @@ public class Game {
       println "${players.get(currentPlayer)} now has ${purses[currentPlayer]} Gold Coins."
 
       boolean winner = didPlayerWin()
-      currentPlayer++
-      if (currentPlayer == players.size()) currentPlayer = 0
+      changePlayer()
 
       return winner
     }
@@ -144,13 +141,17 @@ public class Game {
     println players.get(currentPlayer)+ " was sent to the penalty box"
     inPenaltyBox[currentPlayer] = true
 
-    currentPlayer++
-    if (currentPlayer == players.size()) currentPlayer = 0
+    changePlayer()
     return true
   }
 
 
   private boolean didPlayerWin() {
     return !(purses[currentPlayer] == 6)
+  }
+
+  private void changePlayer() {
+    currentPlayer++
+    if (currentPlayer == players.size()) currentPlayer = 0
   }
 }
