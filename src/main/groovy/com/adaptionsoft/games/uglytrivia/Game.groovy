@@ -57,10 +57,8 @@ public class Game {
         isGettingOutOfPenaltyBox = true
 
         println players.get(currentPlayer) + " is getting out of the penalty box"
-        places[currentPlayer] = places[currentPlayer] + roll
-        if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
+        movePlace(roll)
 
-        println "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
         println "The category is " + currentCategory()
         askQuestion()
       } else {
@@ -70,10 +68,8 @@ public class Game {
 
     } else {
 
-      places[currentPlayer] = places[currentPlayer] + roll
-      if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
+      movePlace(roll)
 
-      println "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
       println "The category is " + currentCategory()
       askQuestion()
     }
@@ -153,5 +149,11 @@ public class Game {
   private void changePlayer() {
     currentPlayer++
     if (currentPlayer == players.size()) currentPlayer = 0
+  }
+
+  private void movePlace(int roll) {
+    places[currentPlayer] = places[currentPlayer] + roll
+    if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
+    println "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
   }
 }
