@@ -80,16 +80,11 @@ public class Game {
   }
 
   private String currentCategory() {
-    if (places[currentPlayer] == 0) return "Pop"
-    if (places[currentPlayer] == 4) return "Pop"
-    if (places[currentPlayer] == 8) return "Pop"
-    if (places[currentPlayer] == 1) return "Science"
-    if (places[currentPlayer] == 5) return "Science"
-    if (places[currentPlayer] == 9) return "Science"
-    if (places[currentPlayer] == 2) return "Sports"
-    if (places[currentPlayer] == 6) return "Sports"
-    if (places[currentPlayer] == 10) return "Sports"
-    return "Rock"
+    def currentPlace = places[currentPlayer]
+    if ([0, 4, 8].contains(currentPlace)) return QuestionCategory.POP
+    if ([1, 5, 9].contains(currentPlace)) return QuestionCategory.SCIENCE
+    if ([2, 6, 10].contains(currentPlace)) return QuestionCategory.SPORTS
+    return QuestionCategory.ROCK
   }
 
   public boolean wasCorrectlyAnswered() {
@@ -141,5 +136,15 @@ public class Game {
     places[currentPlayer] = places[currentPlayer] + roll
     if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12
     println "${players.get(currentPlayer)}'s new location is ${places[currentPlayer]}"
+  }
+
+  enum QuestionCategory {
+    POP('Pop'), SCIENCE('Science'), SPORTS('Sports'), ROCK('Rock')
+
+    private final String value
+
+    QuestionCategory(String value) {
+      this.value = value
+    }
   }
 }
