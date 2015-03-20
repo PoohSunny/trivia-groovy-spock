@@ -32,8 +32,6 @@ public class Game {
   }
 
   public boolean add(String playerName) {
-
-
     players.add(playerName)
     places[howManyPlayers()] = 0
     purses[howManyPlayers()] = 0
@@ -63,12 +61,10 @@ public class Game {
         println players.get(currentPlayer) + " is not getting out of the penalty box"
         isGettingOutOfPenaltyBox = false
       }
-
     } else {
       movePlace(roll)
       askQuestion()
     }
-
   }
 
   private void askQuestion() {
@@ -82,7 +78,6 @@ public class Game {
     if (currentCategory() == "Rock")
       println rockQuestions.removeFirst()
   }
-
 
   private String currentCategory() {
     if (places[currentPlayer] == 0) return "Pop"
@@ -112,11 +107,7 @@ public class Game {
         changePlayer()
         return true
       }
-
-
-
     } else {
-
       println "Answer was corrent!!!!"
       purses[currentPlayer]++
       println "${players.get(currentPlayer)} now has ${purses[currentPlayer]} Gold Coins."
@@ -136,7 +127,6 @@ public class Game {
     changePlayer()
     return true
   }
-
 
   private boolean didPlayerWin() {
     return !(purses[currentPlayer] == 6)
