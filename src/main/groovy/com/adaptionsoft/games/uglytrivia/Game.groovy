@@ -6,21 +6,27 @@ public class Game {
   int[] purses  = new int[6]
   boolean[] inPenaltyBox  = new boolean[6]
 
-  LinkedList popQuestions = new LinkedList()
-  LinkedList scienceQuestions = new LinkedList()
-  LinkedList sportsQuestions = new LinkedList()
-  LinkedList rockQuestions = new LinkedList()
-
   int currentPlayer = 0
   boolean isGettingOutOfPenaltyBox
 
   public  Game(){
-    50.times { def i ->
-      popQuestions.addLast("Pop Question " + i)
-      scienceQuestions.addLast(("Science Question " + i))
-      sportsQuestions.addLast(("Sports Question " + i))
-      rockQuestions.addLast(createRockQuestion(i))
-    }
+    Category popCatecory = new Category(name: "Pop")
+    Category scienceCatecory = new Category(name: "Science")
+    Category sportsCatecory = new Category(name: "Sports")
+    Category rockCatecory = new Category(name: "Rock")
+
+    places[0] = new Place(category: popCatecory)
+    places[4] = new Place(category: popCatecory)
+    places[8] = new Place(category: popCatecory)
+    places[1] = new Place(category: scienceCatecory)
+    places[5] = new Place(category: scienceCatecory)
+    places[9] = new Place(category: scienceCatecory)
+    places[2] = new Place(category: sportsCatecory)
+    places[6] = new Place(category: sportsCatecory)
+    places[10] = new Place(category: sportsCatecory)
+    places[3] = new Place(category: rockCatecory)
+    places[7] = new Place(category: rockCatecory)
+    places[11] = new Place(category: rockCatecory)
   }
 
   public String createRockQuestion(int index){
@@ -77,6 +83,13 @@ public class Game {
       println sportsQuestions.removeFirst()
     if (currentCategory() == "Rock")
       println rockQuestions.removeFirst()
+
+    Category category = currentCategory()
+    println "The category is " + category.name
+    println category.popQuestion()
+
+    Question question = currentQuestion()
+    question.ask()
   }
 
   private String currentCategory() {
